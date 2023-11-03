@@ -5,7 +5,9 @@ Explanation about the logic on how to calculate the trapped rain water:
 Intuition:
 
 -> So water will be trapped only if the left block and the right block is greater than the current block.
+
 -> So at every index we have to consider the left max and right max and we will do min(leftmax,rightmax)-height[i]. It will give the water trapped at index i.
+
 -> The time complexity of this solution is O(N^2). Since we have to travel to left and right to find out the leftMax and rightMax for every index.
 
 
