@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const terrain = document.getElementById("terrain");
     const trappedWater = document.getElementById("trapped-water");
 
+    //Initialize empty array and wait for user input
     let heights = [];
 
     function buildTerrain(heights) {
@@ -14,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    //Logic about calculating the water trapped.
     function calculateTrappedRainwater(heights) {
         let trappedWater = 0;
         let leftMax = 0;
@@ -43,19 +45,24 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     window.generateTerrain = function () {
+        //Gets input from the input field
         const inputElement = document.getElementById("heightsInput");
+        //Splits the value and adds them into the array
         const inputValues = inputElement.value.split(",").map(value => parseInt(value.trim(), 10));
 
-        
-        if (inputValues.some(isNaN)) {
-            alert("Please enter valid numeric values separated by commas.");
+        // Checks if the number is valid
+        if (inputValues.some(isNaN)) {        
+            alert("Please enter values separated by commas(',')");
             return;
         }
+        //Initialize heights array
         heights = inputValues;
+
+        //We call the buildTerrain to build the terrain as per inputs
         buildTerrain(heights);
 
         trappedWater.textContent = calculateTrappedRainwater(heights);
     };
-    
+
     buildTerrain(heights);
 });
