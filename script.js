@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const terrain = document.getElementById("terrain");
     const trappedWater = document.getElementById("trapped-water");
 
-    const heights = [0,4,0,0,0,6,0,6,4,0]; // Example heights, modify as needed
+    let heights = [];
 
     function buildTerrain(heights) {
         terrain.innerHTML = "";
@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const cell = document.createElement("div");
             cell.className = "cell";
             cell.style.height = height * 40 + "px";
-            terrain.insertBefore(cell, terrain.firstChild); // Insert cells at the beginning (top)
+            terrain.insertBefore(cell, terrain.firstChild);
         });
     }
 
@@ -42,6 +42,20 @@ document.addEventListener("DOMContentLoaded", function () {
         return trappedWater;
     }
 
+    window.generateTerrain = function () {
+        const inputElement = document.getElementById("heightsInput");
+        const inputValues = inputElement.value.split(",").map(value => parseInt(value.trim(), 10));
+
+        
+        if (inputValues.some(isNaN)) {
+            alert("Please enter valid numeric values separated by commas.");
+            return;
+        }
+        heights = inputValues;
+        buildTerrain(heights);
+
+        trappedWater.textContent = calculateTrappedRainwater(heights);
+    };
+    
     buildTerrain(heights);
-    trappedWater.textContent = calculateTrappedRainwater(heights);
 });

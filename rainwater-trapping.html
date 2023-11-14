@@ -5,8 +5,13 @@
 </head>
 <body>
     <div id="container">
+        <div>
+            <label for="heightsInput">Enter Heights (comma-separated): </label>
+            <input type="text" id="heightsInput">
+            <button onclick="generateTerrain()">Generate Terrain</button>
+        </div>
         <div id="terrain">
-            <!-- Your terrain will be drawn here using JavaScript -->
+            <!-- Terrain -->
         </div>
         <div id="result">
             Total Trapped Rainwater: <span id="trapped-water">0</span>

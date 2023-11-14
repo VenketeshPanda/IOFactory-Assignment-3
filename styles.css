@@ -12,7 +12,11 @@
     width: 40px;
     height: 40px;
     border: 1px solid #000;
-    background-color: #ccc;
+    background-color: #ccc; 
+}
+
+.water {
+    background-color: #00f; 
 }
 
 #result {
