@@ -4,15 +4,24 @@
 }
 
 #terrain {
-    display: flex;
-    align-items: flex-end;
+    display: table;
+    border-collapse: collapse;
+}
+
+.row {
+    display: table-row;
 }
 
 .cell {
+    display: table-cell;
     width: 40px;
     height: 40px;
     border: 1px solid #000;
-    background-color: #ccc; 
+    background-color: #ccc;
+}
+
+.terrain {
+    background-color: #8B4513; 
 }
 
 .water {
