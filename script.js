@@ -2,44 +2,41 @@ document.addEventListener("DOMContentLoaded", function () {
     const terrainTable = document.getElementById("terrain");
     const trappedWater = document.getElementById("trapped-water");
 
-    // Initialize empty array and wait for user input
     let heights = [];
 
     function buildTerrain(heights) {
         terrainTable.innerHTML = "";
-    
+
         for (let i = 0; i < Math.max(...heights); i++) {
             const row = document.createElement("tr");
-    
+
             heights.forEach((height, index) => {
                 const cell = document.createElement("td");
                 cell.className = "cell";
-    
+
                 if (heights[index] >= Math.max(...heights) - i) {
                     cell.classList.add("terrain");
                 } else {
-                    // Determine the height for the blue terrain using the updated findNonZeroLeft and findNonZeroRight
+                    //Logic for determining water
                     const leftNonZero = findNonZeroLeft(heights, index);
                     const rightNonZero = findNonZeroRight(heights, index);
-                    const blueHeight = Math.min(leftNonZero, rightNonZero) - heights[index];
-    
-                    // Build blue-colored terrain on top of brown terrain wherever there is a chance
+                    const blueHeight = (heights[index] !== 0) ?  Math.min(leftNonZero, rightNonZero) :  Math.min(leftNonZero, rightNonZero) - heights[index];
+
+                    
                     if (i > Math.max(...heights) - heights[index]) {
                         cell.classList.add("water");
                     } else if (blueHeight >= Math.max(...heights) - i) {
                         cell.classList.add("water");
                     }
                 }
-    
+
                 row.appendChild(cell);
             });
-    
+
             terrainTable.appendChild(row);
         }
     }
-    
 
-    // Helper function to find the immediate non-zero value on the left
     function findNonZeroLeft(heights, index) {
         let maxLeft = 0;
 
@@ -52,7 +49,6 @@ document.addEventListener("DOMContentLoaded", function () {
         return maxLeft;
     }
 
-    // Helper function to find the immediate non-zero value on the right
     function findNonZeroRight(heights, index) {
         let maxRight = 0;
 
@@ -65,8 +61,6 @@ document.addEventListener("DOMContentLoaded", function () {
         return maxRight;
     }
 
-
-    // Logic about calculating the water trapped.
     function calculateTrappedRainwater(heights) {
         let trappedWater = 0;
         let leftMax = 0;
